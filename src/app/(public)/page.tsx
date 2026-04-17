@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Item, Stagger } from "@/components/motion/stagger";
 import { useAuth } from "@/hooks/use-auth";
 import BorderGlow from "@/components/BorderGlow";
+import Radar from "@/components/Radar";
 
 const features = [
   {
@@ -39,9 +40,31 @@ export default function LandingPage() {
   const { isAuthed } = useAuth();
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-16">
-      <Stagger className="grid gap-14">
-        <section className="grid items-center gap-10 md:grid-cols-2">
+    <div className="relative">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 opacity-55">
+            <Radar
+              color="#60a5fa"
+              backgroundColor="#000000"
+            scale={0.62}
+            ringCount={10}
+            spokeCount={14}
+            ringThickness={0.04}
+            spokeThickness={0.008}
+            sweepSpeed={0.95}
+            sweepWidth={2.2}
+            brightness={0.78}
+            falloff={2.1}
+              enableMouseInteraction={false}
+            />
+          </div>
+        <div className="absolute inset-0 bg-background/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/35 to-background/70" />
+      </div>
+
+      <div className="relative mx-auto w-full max-w-6xl px-4 py-16">
+        <Stagger className="grid gap-14">
+          <section className="grid items-center gap-10 rounded-[28px] md:grid-cols-2">
           <Item className="space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/5 px-3 py-1 text-xs text-muted-foreground">
               <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_18px_theme(colors.primary/0.45)]" />
@@ -195,7 +218,8 @@ export default function LandingPage() {
             </Link>
           </Item>
         </section>
-      </Stagger>
+        </Stagger>
+      </div>
     </div>
   );
 }
