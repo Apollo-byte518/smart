@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Item, Stagger } from "@/components/motion/stagger";
 import { useAuth } from "@/hooks/use-auth";
+import BorderGlow from "@/components/BorderGlow";
 
 const features = [
   {
@@ -146,16 +147,27 @@ export default function LandingPage() {
             {features.map((f) => (
               <Item key={f.title}>
                 <Link href={f.href} className="block">
-                  <Card className="glass group h-full rounded-2xl p-5 transition-transform duration-300 hover:-translate-y-0.5">
-                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/15 ring-1 ring-primary/25">
-                      <f.icon className="h-5 w-5 text-primary" />
+                  <BorderGlow
+                    className="group h-full rounded-2xl transition-transform duration-300 hover:-translate-y-0.5"
+                    glowColor="210 100 70"
+                    backgroundColor="rgba(14, 20, 36, 0.9)"
+                    borderRadius={16}
+                    glowRadius={24}
+                    glowIntensity={0.75}
+                    fillOpacity={0.2}
+                    colors={["#60a5fa", "#38bdf8", "#a78bfa"]}
+                  >
+                    <div className="h-full p-5">
+                      <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/15 ring-1 ring-primary/25">
+                        <f.icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="mt-4 text-sm font-semibold">{f.title}</div>
+                      <div className="mt-1 text-sm text-muted-foreground">{f.desc}</div>
+                      <div className="mt-4 text-xs text-primary/90 opacity-0 transition-opacity group-hover:opacity-100">
+                        Read details →
+                      </div>
                     </div>
-                    <div className="mt-4 text-sm font-semibold">{f.title}</div>
-                    <div className="mt-1 text-sm text-muted-foreground">{f.desc}</div>
-                    <div className="mt-4 text-xs text-primary/90 opacity-0 transition-opacity group-hover:opacity-100">
-                      Read details →
-                    </div>
-                  </Card>
+                  </BorderGlow>
                 </Link>
               </Item>
             ))}
