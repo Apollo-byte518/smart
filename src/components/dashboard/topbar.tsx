@@ -23,7 +23,9 @@ export function Topbar() {
   const { logout } = useAuth();
   const alerts = useAlerts();
   const [notificationsOpen, setNotificationsOpen] = React.useState(false);
+  const [accountOpen, setAccountOpen] = React.useState(false);
   const notificationsRef = React.useRef<HTMLDivElement | null>(null);
+  const accountRef = React.useRef<HTMLDivElement | null>(null);
 
   const items = alerts.data ?? [];
   const unread = items.filter((a) => a.severity !== "active").length;
@@ -35,9 +37,16 @@ export function Topbar() {
       if (!notificationsRef.current.contains(ev.target as Node)) {
         setNotificationsOpen(false);
       }
+      if (!accountRef.current) return;
+      if (!accountRef.current.contains(ev.target as Node)) {
+        setAccountOpen(false);
+      }
     };
     const onKeyDown = (ev: KeyboardEvent) => {
-      if (ev.key === "Escape") setNotificationsOpen(false);
+      if (ev.key === "Escape") {
+        setNotificationsOpen(false);
+        setAccountOpen(false);
+      }
     };
     document.addEventListener("mousedown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
@@ -126,31 +135,37 @@ export function Topbar() {
             ) : null}
           </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              render={
-                <Button variant="secondary" className="bg-white/5 hover:bg-white/10">
-                  <Avatar className="mr-2 h-6 w-6">
-                    <AvatarFallback className="bg-primary/15 text-primary">OP</AvatarFallback>
-                  </Avatar>
-                  <span className="hidden text-sm md:inline">Operator</span>
-                </Button>
-              }
-            />
-            <DropdownMenuContent align="end" className="w-52">
-              <div className="px-2 py-1 text-xs font-medium text-muted-foreground">Account</div>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => {
-                  logout();
-                  router.replace("/login");
-                }}
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div ref={accountRef} className="relative">
+            <Button
+              variant="secondary"
+              className="bg-white/5 hover:bg-white/10"
+              onClick={() => setAccountOpen((prev) => !prev)}
+            >
+              <Avatar className="mr-2 h-6 w-6">
+                <AvatarFallback className="bg-primary/15 text-primary">OP</AvatarFallback>
+              </Avatar>
+              <span className="hidden text-sm md:inline">Operator</span>
+            </Button>
+
+            {accountOpen ? (
+              <div className="absolute right-0 top-[calc(100%+8px)] z-50 w-52 rounded-lg border border-border/60 bg-popover p-2 text-popover-foreground shadow-lg">
+                <div className="px-2 py-1 text-xs font-medium text-muted-foreground">Account</div>
+                <div className="my-1 h-px bg-border" />
+                <button
+                  type="button"
+                  className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                  onClick={() => {
+                    setAccountOpen(false);
+                    logout();
+                    router.replace("/login");
+                  }}
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </button>
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </header>
