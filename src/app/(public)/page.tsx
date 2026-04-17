@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Item, Stagger } from "@/components/motion/stagger";
 import { useAuth } from "@/hooks/use-auth";
+import { useTheme } from "next-themes";
 import BorderGlow from "@/components/BorderGlow";
 import Radar from "@/components/Radar";
 
@@ -38,6 +39,8 @@ const features = [
 
 export default function LandingPage() {
   const { isAuthed } = useAuth();
+  const { resolvedTheme } = useTheme();
+  const isLight = resolvedTheme === "light";
 
   return (
     <div className="relative">
@@ -172,13 +175,13 @@ export default function LandingPage() {
                 <Link href={f.href} className="block">
                   <BorderGlow
                     className="group h-full rounded-2xl transition-transform duration-300 hover:-translate-y-0.5"
-                    glowColor="210 100 70"
-                    backgroundColor="rgba(14, 20, 36, 0.9)"
+                    glowColor={isLight ? "215 95 55" : "210 100 70"}
+                    backgroundColor={isLight ? "rgba(255, 255, 255, 0.86)" : "rgba(14, 20, 36, 0.9)"}
                     borderRadius={16}
                     glowRadius={24}
-                    glowIntensity={0.75}
-                    fillOpacity={0.2}
-                    colors={["#60a5fa", "#38bdf8", "#a78bfa"]}
+                    glowIntensity={isLight ? 0.5 : 0.75}
+                    fillOpacity={isLight ? 0.1 : 0.2}
+                    colors={isLight ? ["#60a5fa", "#93c5fd", "#c4b5fd"] : ["#60a5fa", "#38bdf8", "#a78bfa"]}
                   >
                     <div className="h-full p-5">
                       <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/15 ring-1 ring-primary/25">

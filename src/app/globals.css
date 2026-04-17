@@ -124,10 +124,28 @@
   body {
     @apply bg-background text-foreground;
     background-image:
+      radial-gradient(
+        900px 500px at 10% -10%,
+        color-mix(in oklab, oklch(0.72 0.19 255) 10%, transparent),
+        transparent 60%
+      ),
+      radial-gradient(
+        900px 500px at 90% 0%,
+        color-mix(in oklab, oklch(0.78 0.14 200) 8%, transparent),
+        transparent 55%
+      ),
+      radial-gradient(
+        700px 380px at 50% 110%,
+        color-mix(in oklab, oklch(0.78 0.18 320) 6%, transparent),
+        transparent 55%
+      );
+    background-attachment: fixed;
+  }
+  .dark body {
+    background-image:
       radial-gradient(900px 500px at 10% -10%, color-mix(in oklab, oklch(0.72 0.19 255) 25%, transparent), transparent 60%),
       radial-gradient(900px 500px at 90% 0%, color-mix(in oklab, oklch(0.78 0.14 200) 18%, transparent), transparent 55%),
       radial-gradient(700px 380px at 50% 110%, color-mix(in oklab, oklch(0.78 0.18 320) 12%, transparent), transparent 55%);
-    background-attachment: fixed;
   }
   html {
     @apply font-sans;
@@ -136,12 +154,20 @@
 
 @layer utilities {
   .glass {
+    background: color-mix(in oklab, var(--card) 92%, transparent);
+    border: 1px solid color-mix(in oklab, var(--border) 85%, transparent);
+    box-shadow:
+      0 8px 24px color-mix(in oklab, black 10%, transparent),
+      inset 0 1px 0 color-mix(in oklab, white 38%, transparent);
+    backdrop-filter: blur(14px);
+  }
+
+  .dark .glass {
     background: color-mix(in oklab, oklch(0.18 0.02 260) 68%, transparent);
     border: 1px solid color-mix(in oklab, oklch(1 0 0 / 14%) 88%, transparent);
     box-shadow:
       0 12px 40px color-mix(in oklab, black 50%, transparent),
       inset 0 1px 0 color-mix(in oklab, white 6%, transparent);
-    backdrop-filter: blur(14px);
   }
 
   .neon-ring {

@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Bell, Home, LogOut, Search } from "lucide-react";
+import { Bell, Home, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,7 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useAuth } from "@/hooks/use-auth";
 import { useAlerts } from "@/hooks/api/use-alerts";
@@ -59,14 +58,6 @@ export function Topbar() {
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/45 backdrop-blur-xl">
       <div className="flex h-16 items-center gap-3 px-4">
-        <div className="relative hidden w-[520px] max-w-[48vw] md:block">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Search alerts, users, cameras..."
-            className="h-10 bg-white/5 pl-9"
-          />
-        </div>
-
         <div className="ml-auto flex items-center gap-2">
           <Button
             variant="secondary"

@@ -101,26 +101,28 @@ export default function ReportsPage() {
           </div>
         </Card>
 
-        <Card className="glass rounded-2xl p-6">
-          <div className="text-sm font-semibold">Footage in reports</div>
-          <div className="mt-1 text-sm text-muted-foreground">
-            Review report-ready footage from alert captures and critical moments.
-          </div>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
-            <Link
-              href="/dashboard/saved-footage/alerts"
-              className="rounded-xl border border-border/60 bg-white/5 px-4 py-3 text-sm text-foreground transition-colors hover:bg-white/10"
-            >
-              Open Footage Alerts
-            </Link>
-            <Link
-              href="/dashboard/saved-footage/critical-moments"
-              className="rounded-xl border border-border/60 bg-white/5 px-4 py-3 text-sm text-foreground transition-colors hover:bg-white/10"
-            >
-              Open Critical Moments
-            </Link>
-          </div>
-        </Card>
+        <div className="w-fit">
+          <Card className="glass w-fit rounded-xl p-3">
+            <div className="text-sm font-semibold">Footage in reports</div>
+            <div className="mt-1 max-w-[280px] text-xs text-muted-foreground">
+              Review report-ready footage from alert captures and critical moments.
+            </div>
+            <div className="mt-3 grid max-w-[210px] gap-2">
+              <Link
+                href="/dashboard/saved-footage/alerts"
+                className="inline-flex h-7 items-center justify-center rounded-md border border-border/60 bg-white/[0.04] px-2 text-[10px] font-medium text-foreground/90 transition-colors hover:bg-white/[0.09] hover:text-foreground"
+              >
+                Open Footage Alerts
+              </Link>
+              <Link
+                href="/dashboard/saved-footage/critical-moments"
+                className="inline-flex h-7 items-center justify-center rounded-md border border-border/60 bg-white/[0.04] px-2 text-[10px] font-medium text-foreground/90 transition-colors hover:bg-white/[0.09] hover:text-foreground"
+              >
+                Open Critical Moments
+              </Link>
+            </div>
+          </Card>
+        </div>
       </PageShell>
     </PageTransition>
   );

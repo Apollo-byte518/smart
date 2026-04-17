@@ -44,11 +44,13 @@ export function SeverityBreakdownChart({
             width={34}
           />
           <Tooltip
+            cursor={{ fill: "rgba(255,255,255,0.03)" }}
             contentStyle={{
-              background: "rgba(15, 15, 18, 0.8)",
+              background: "rgba(10, 14, 24, 0.62)",
               border: "1px solid rgba(255,255,255,0.12)",
               borderRadius: 14,
-              backdropFilter: "blur(14px)",
+              boxShadow: "0 12px 28px rgba(0,0,0,0.28)",
+              backdropFilter: "blur(18px)",
             }}
             labelStyle={{ color: "rgba(255,255,255,0.75)" }}
             itemStyle={{ color: "rgba(255,255,255,0.85)" }}
