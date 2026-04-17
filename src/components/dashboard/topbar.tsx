@@ -3,10 +3,18 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Bell, Home, LogOut, Search } from "lucide-react";
+import { Bell, CreditCard, Home, LogOut, Search } from "lucide-react";
 import { MobileSidebar } from "@/components/dashboard/mobile-sidebar";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useAuth } from "@/hooks/use-auth";
@@ -50,6 +58,30 @@ export function Topbar() {
                 <Button
                   variant="secondary"
                   size="icon"
+                  className="bg-white/5 hover:bg-white/10"
+                  aria-label="Billing menu"
+                >
+                  <CreditCard className="h-5 w-5" />
+                </Button>
+              }
+            />
+            <DropdownMenuContent align="end" className="w-[220px]">
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>Billing</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Plan & usage</DropdownMenuItem>
+                <DropdownMenuItem>Invoices</DropdownMenuItem>
+                <DropdownMenuItem>Payment method</DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              render={
+                <Button
+                  variant="secondary"
+                  size="icon"
                   className="relative bg-white/5 hover:bg-white/10"
                   aria-label="Notifications"
                 >
@@ -63,35 +95,37 @@ export function Topbar() {
               }
             />
             <DropdownMenuContent align="end" className="w-[340px]">
-              <DropdownMenuLabel>Notifications</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {alerts.isError ? (
-                <div className="px-3 py-2 text-sm text-destructive">Failed to load alerts.</div>
-              ) : preview.length === 0 ? (
-                <div className="px-3 py-2 text-sm text-muted-foreground">No alerts right now.</div>
-              ) : (
-                <div className="grid gap-2 px-2 py-2">
-                  {preview.map((a) => (
-                    <Link
-                      key={a.id}
-                      href="/dashboard/alerts"
-                      className="glass rounded-xl px-3 py-2 transition-colors hover:bg-white/[0.06]"
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="truncate text-sm font-medium">{a.title}</div>
-                        <StatusBadge severity={a.severity} />
-                      </div>
-                      <div className="mt-1 line-clamp-1 text-xs text-muted-foreground">
-                        {a.location} • {a.source}
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              )}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem render={<Link href="/dashboard/alerts" />}>
-                View all alerts
-              </DropdownMenuItem>
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {alerts.isError ? (
+                  <div className="px-3 py-2 text-sm text-destructive">Failed to load alerts.</div>
+                ) : preview.length === 0 ? (
+                  <div className="px-3 py-2 text-sm text-muted-foreground">No alerts right now.</div>
+                ) : (
+                  <div className="grid gap-2 px-2 py-2">
+                    {preview.map((a) => (
+                      <Link
+                        key={a.id}
+                        href="/dashboard/alerts"
+                        className="glass rounded-xl px-3 py-2 transition-colors hover:bg-white/[0.06]"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="truncate text-sm font-medium">{a.title}</div>
+                          <StatusBadge severity={a.severity} />
+                        </div>
+                        <div className="mt-1 line-clamp-1 text-xs text-muted-foreground">
+                          {a.location} • {a.source}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem render={<Link href="/dashboard/alerts" />}>
+                  View all alerts
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -107,17 +141,19 @@ export function Topbar() {
               }
             />
             <DropdownMenuContent align="end" className="w-52">
-              <DropdownMenuLabel>Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => {
-                  logout();
-                  router.replace("/login");
-                }}
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </DropdownMenuItem>
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={() => {
+                    logout();
+                    router.replace("/login");
+                  }}
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

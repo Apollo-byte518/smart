@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { PageShell } from "@/components/dashboard/page-shell";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -97,6 +98,27 @@ export default function ReportsPage() {
                 </div>
               </>
             )}
+          </div>
+        </Card>
+
+        <Card className="glass rounded-2xl p-6">
+          <div className="text-sm font-semibold">Footage in reports</div>
+          <div className="mt-1 text-sm text-muted-foreground">
+            Review report-ready footage from alert captures and critical moments.
+          </div>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            <Link
+              href="/dashboard/saved-footage/alerts"
+              className="rounded-xl border border-border/60 bg-white/5 px-4 py-3 text-sm text-foreground transition-colors hover:bg-white/10"
+            >
+              Open Footage Alerts
+            </Link>
+            <Link
+              href="/dashboard/saved-footage/critical-moments"
+              className="rounded-xl border border-border/60 bg-white/5 px-4 py-3 text-sm text-foreground transition-colors hover:bg-white/10"
+            >
+              Open Critical Moments
+            </Link>
           </div>
         </Card>
       </PageShell>
